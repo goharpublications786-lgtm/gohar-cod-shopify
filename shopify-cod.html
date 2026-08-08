@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cash on Delivery</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 20px;
+      font-family: Arial, sans-serif;
+      background: #ffffff;
+    }
+
+    .cod-container {
+      width: 100%;
+      max-width: 500px;
+      margin: auto;
+    }
+
+    .cod-button {
+      width: 100%;
+      padding: 16px 20px;
+      border: none;
+      border-radius: 6px;
+      background: #111111;
+      color: #ffffff;
+      font-size: 17px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .cod-button:hover {
+      background: #333333;
+    }
+
+    .cod-form {
+      display: none;
+      margin-top: 18px;
+      padding: 20px;
+      border: 1px solid #dddddd;
+      border-radius: 8px;
+      background: #ffffff;
+      box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+    }
+
+    .cod-form h2 {
+      margin: 0 0 18px;
+      font-size: 22px;
+    }
+
+    .cod-form label {
+      display: block;
+      margin: 12px 0 6px;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .cod-form input,
+    .cod-form textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #cccccc;
+      border-radius: 5px;
+      font-size: 15px;
+      outline: none;
+    }
+
+    .cod-form textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    .cod-submit {
+      width: 100%;
+      margin-top: 18px;
+      padding: 14px;
+      border: none;
+      border-radius: 6px;
+      background: #198754;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .cod-submit:hover {
+      background: #157347;
+    }
+
+    .cod-message {
+      display: none;
+      margin-top: 15px;
+      padding: 12px;
+      border-radius: 5px;
+      background: #e8f7ee;
+      color: #146c43;
+      font-weight: 600;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="cod-container">
+
+  <button type="button" class="cod-button" onclick="openCODForm()">
+    BUY WITH CASH ON DELIVERY
+  </button>
+
+  <div id="codForm" class="cod-form">
+
+    <h2>Cash on Delivery</h2>
+
+    <form onsubmit="submitCOD(event)">
+
+      <label for="name">Full Name</label>
+      <input
+        type="text"
+        id="name"
+        name="name"
+        placeholder="Enter your full name"
+        required
+      >
+
+      <label for="phone">Phone Number</label>
+      <input
+        type="tel"
+        id="phone"
+        name="phone"
+        placeholder="03XXXXXXXXX"
+        required
+      >
+
+      <label for="city">City</label>
+      <input
+        type="text"
+        id="city"
+        name="city"
+        placeholder="Enter your city"
+        required
+      >
+
+      <label for="address">Complete Address</label>
+      <textarea
+        id="address"
+        name="address"
+        placeholder="House No, Street, Area..."
+        required
+      ></textarea>
+
+      <button type="submit" class="cod-submit">
+        PLACE COD ORDER
+      </button>
+
+    </form>
+
+    <div id="codMessage" class="cod-message">
+      Your COD order has been submitted successfully.
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+
+function openCODForm() {
+  document.getElementById("codForm").style.display = "block";
+
+  document.getElementById("codForm").scrollIntoView({
+    behavior: "smooth",
+    block: "center"
+  });
+}
+
+function submitCOD(event) {
+
+  event.preventDefault();
+
+  const name = document.getElementById("name").value.trim();
+  const phone = document.getElementById("phone").value.trim();
+  const city = document.getElementById("city").value.trim();
+  const address = document.getElementById("address").value.trim();
+
+  if (!name || !phone || !city || !address) {
+    alert("Please fill all fields.");
+    return;
+  }
+
+  document.getElementById("codMessage").style.display = "block";
+
+  document.getElementById("codMessage").innerHTML =
+    "Thank you " + name + "! Your Cash on Delivery order has been received.";
+
+  event.target.reset();
+}
+
+</script>
+
+</body>
+</html>
